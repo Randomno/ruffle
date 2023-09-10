@@ -145,5 +145,19 @@ pub fn random<'gc>(
     _this: Object<'gc>,
     _args: &[Value<'gc>],
 ) -> Result<Value<'gc>, Error<'gc>> {
-    Ok(activation.context.rng.gen_range(0.0f64..1.0f64).into())
+    // Generate a random value
+    let random_value: f64 = activation.context.rng.gen_range(0.0f64..1.0f64);
+
+    // Get a reference to random_value
+    let random_value_ref: &f64 = &random_value;
+
+    // Get a raw pointer to random_value
+    let random_value_ptr: *const f64 = random_value_ref as *const f64;
+
+    // Log the random value and its memory location to the console
+    println!("Random Value: {}", random_value);
+    println!("Memory Location (Address): {:?}", random_value_ptr);
+
+    // Return the random value as a result
+    Ok(random_value.into())
 }
